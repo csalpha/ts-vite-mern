@@ -25,3 +25,15 @@
    1. npm i react-router-dom
    2. create route for home page
    3. create route for product page
+
+5. Create Node.JS Server
+
+   1. create server folder and run npm init
+   2. npm install express
+   3. npm install -save-dev typescript ts-node-dev @types/express
+   4. npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+   5. create src/index.ts
+   6. create route for '/' endpoin and return server is ready.
+   7. create data.ts and Product.ts
+   8. create route for /api/products
+   9. return products
