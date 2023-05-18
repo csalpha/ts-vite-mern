@@ -19,3 +19,9 @@
    1. npm install react-bootstrap bootstrap
    2. import bootstrap css
    3. update App.tsx
+
+4. Add page routing
+
+   1. npm i react-router-dom
+   2. create route for home page
+   3. create route for product page
