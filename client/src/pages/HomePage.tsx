@@ -1,12 +1,12 @@
 import axios from "axios"; // The component uses axios to make HTTP requests
 import { useEffect, useReducer } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom"; // The component uses react-router-dom for navigation.
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { ApiError } from "../types/ApiError";
 import { Product } from "../types/Product";
 import { getError } from "../utils";
+import ProductItem from "../components/ProductItem";
 
 // define State type
 type State = {
@@ -121,18 +121,8 @@ const HomePage = () => {
     <Row>
       {/* the products array is mapped over and a list of products is rendered inside a Row component. */}
       {products.map((product) => (
-        // Each product is displayed inside a Col component, with its details and an image.
         <Col key={product.slug} sm={6} md={4} lg={3}>
-          {/* The Link component is used to create a navigation link to the specific product page. */}
-          <Link to={"/product/" + product.slug}>
-            <img
-              src={product.image}
-              alt={product.name}
-              className='product-image'
-            />
-            <h2>{product.name}</h2>
-            <p>{product.price} </p>
-          </Link>
+          <ProductItem product={product} />
         </Col>
       ))}
     </Row>

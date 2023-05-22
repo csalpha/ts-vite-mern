@@ -47,3 +47,9 @@
    5. fetch products
    6. create LoadingBox component create /components/LoadingBox.tsx
    7. create MessageBox component create /components/MessageBox.tsx
+
+7. Create Rating ProductItem Component
+
+   1. Create Rating.tsx
+   2. Create ProductItem.tsx
+   3. Import and render ProductItem Component in HomePage
