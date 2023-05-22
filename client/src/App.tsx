@@ -1,15 +1,13 @@
-import "./App.css";
-import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
     <div className='d-flex flex-column vh-100'>
       <header>
-        {" "}
         <Navbar bg='dark' variant='dark' expand='lg'>
           <Container>
-            <Navbar.Brand>TS MERN</Navbar.Brand>
+            <Navbar.Brand>ts vite</Navbar.Brand>
           </Container>
           <Nav>
             <a href='/cart' className='nav-link'>
@@ -32,6 +30,6 @@ function App() {
       </footer>
     </div>
   );
-}
+};
 
 export default App;

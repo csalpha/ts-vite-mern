@@ -37,3 +37,13 @@
    7. create data.ts and Product.ts
    8. create route for /api/products
    9. return products
+
+6. Fetch Products
+
+   1. install axios npm install axios
+   2. define types in HomePage
+   3. define initial state and reducer in HomePage.tsx
+   4. define get error function create types/ApiError.ts
+   5. fetch products
+   6. create LoadingBox component create /components/LoadingBox.tsx
+   7. create MessageBox component create /components/MessageBox.tsx

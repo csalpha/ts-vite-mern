@@ -11,21 +11,29 @@ import App from "./App";
 import "./index.css";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
+import axios from "axios";
 
-// create router
+// Set the base URL for Axios requests based on the environment
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:4000" : "/";
+
+// Create a browser router instance
 const router = createBrowserRouter(
+  // define the routes
   createRoutesFromElements(
-    // Declares an element that should be rendered at a certain URL path
+    // define top-level route ( App Component)
     <Route path='/' element={<App />}>
-      <Route index={true} element={<HomePage />} />
+      <Route index={true} /* set as the index route */ element={<HomePage />} />
       <Route path='product/:slug' element={<ProductPage />} />
     </Route>
   )
 );
 
+// Render the app to the root element using ReactDOM.createRoot
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  // The app is wrapped in React.StrictMode for additional development checks.
   <React.StrictMode>
-    {/* Given a Remix Router instance, render the appropriate UI */}
+    {/* The RouterProvider component is used to provide the router instance created earlier. */}
     <RouterProvider router={router} />
   </React.StrictMode>
 );
