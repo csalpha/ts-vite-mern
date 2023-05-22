@@ -60,3 +60,11 @@
    2. Import and use HelmetProvider in main.tsx
    3. Import and use Helmet Component in HomePage.tsx
    4. Import and use Helmet Component in ProductPage.tsx
+
+9. Load Products By React Query
+
+   1. npm i @tanstack/react-query @tanstack/react-query-devtools
+   2. In main.tsx use QueryClientProvider and ReactQueryDevtools
+   3. create apiClient.tsx
+   4. create hooks/productHook.tsx
+   5. implement useGetProductsQuery() in HomePage.tsx
