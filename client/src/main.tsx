@@ -6,12 +6,15 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import "./index.css";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import axios from "axios";
+
+// {} []
 
 // Set the base URL for Axios requests based on the environment
 axios.defaults.baseURL =
@@ -33,7 +36,10 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // The app is wrapped in React.StrictMode for additional development checks.
   <React.StrictMode>
-    {/* The RouterProvider component is used to provide the router instance created earlier. */}
-    <RouterProvider router={router} />
+    {/* The Helmet component is used to manage the document head elements */}
+    <HelmetProvider>
+      {/* The RouterProvider component is used to provide the router instance  */}
+      <RouterProvider router={router} />
+    </HelmetProvider>
   </React.StrictMode>
 );

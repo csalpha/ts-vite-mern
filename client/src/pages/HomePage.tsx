@@ -7,6 +7,7 @@ import { ApiError } from "../types/ApiError";
 import { Product } from "../types/Product";
 import { getError } from "../utils";
 import ProductItem from "../components/ProductItem";
+import { Helmet } from "react-helmet-async";
 
 // define State type
 type State = {
@@ -119,6 +120,9 @@ const HomePage = () => {
   ) : (
     // Display the list of products if data was successfully fetched
     <Row>
+      <Helmet>
+        <title>TS VITE MERN</title>
+      </Helmet>
       {/* the products array is mapped over and a list of products is rendered inside a Row component. */}
       {products.map((product) => (
         <Col key={product.slug} sm={6} md={4} lg={3}>

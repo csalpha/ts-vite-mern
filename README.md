@@ -53,3 +53,10 @@
    1. Create Rating.tsx
    2. Create ProductItem.tsx
    3. Import and render ProductItem Component in HomePage
+
+8. Set Page Title
+
+   1. npm i react-helmet-async
+   2. Import and use HelmetProvider in main.tsx
+   3. Import and use Helmet Component in HomePage.tsx
+   4. Import and use Helmet Component in ProductPage.tsx
