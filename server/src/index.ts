@@ -20,6 +20,15 @@ app.get("/api/products", (req: Request, res: Response) => {
   res.json(products); // Send the list of products as JSON response
 });
 
+// Define a GET endpoint at "/api/products/slug"
+app.get("/api/products/:slug", (req: Request, res: Response) => {
+  // Send the product as JSON response
+  res.json(
+    // Find the product with the matching slug
+    products.find((x) => x.slug === req.params.slug)
+  );
+});
+
 const PORT = 4000;
 
 // Start the server and listen on the specified port

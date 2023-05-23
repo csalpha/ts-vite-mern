@@ -1,5 +1,9 @@
+/* Global styles */
 :root {
+  /* Set the default font family */
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+
+  /* Improve font rendering */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -7,11 +11,22 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/* Styles for the product image */
 .product-image {
+  /* Set the maximum width of the product image */
   max-width: 400px;
+  /* Ensure the image scales responsively */
   width: 100%;
 }
 
+/* Styles for the rating */
 .rating span {
+  /* Set the color of the rating stars */
   color: #ffc000;
+}
+
+/* Styles for large images */
+img.large {
+  /* Set the maximum width of large images */
+  max-width: 100%;
 }

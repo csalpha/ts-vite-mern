@@ -10,5 +10,18 @@ export const useGetProductsQuery = () =>
     // Unique query key to identify the query
     queryKey: ["products"],
     // Asynchronous query function to fetch the products
-    queryFn: async () => (await apiClient.get<Product[]>("api/products")).data,
+    queryFn: async () =>
+      // Make an HTTP GET request to the api/products endpoint using the apiClient
+      (await apiClient.get<Product[]>("api/products")).data,
+  });
+
+// Custom hook to fetch product details by slug
+export const useGetProductDetailsBySlugQuery = (slug: string) =>
+  useQuery({
+    // Unique query key to identify the query
+    queryKey: ["products", slug],
+    // Asynchronous query function to fetch the product details
+    queryFn: async () =>
+      // Make an HTTP GET request to the api/products/${slug} endpoint using the apiClient
+      (await apiClient.get<Product>(`api/products/${slug}`)).data,
   });

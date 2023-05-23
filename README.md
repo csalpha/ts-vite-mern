@@ -68,3 +68,9 @@
    3. create apiClient.tsx
    4. create hooks/productHook.tsx
    5. implement useGetProductsQuery() in HomePage.tsx
+
+10. Create Product Page
+
+    1. Define a GET endpoint at "/api/products/slug" in index.tsx
+    2. Define a Custom hook to fetch product details by slug in productHooks.ts
+    3. Build ProductPage ( Conditional rendering )
