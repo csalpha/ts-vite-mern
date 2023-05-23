@@ -74,3 +74,12 @@
     1. Define a GET endpoint at "/api/products/slug" in index.tsx
     2. Define a Custom hook to fetch product details by slug in productHooks.ts
     3. Build ProductPage ( Conditional rendering )
+
+11. Create React Context Api
+
+    1. Create a Context Store.tsx
+    2. Create a StoreProvider
+    3. Wrap the app with the StoreProvider component to provide the store
+    4. Set the theme based on the mode in App.tsx
+    5. Define a switchModeHandler function
+    6. Render a switchModeHandler button

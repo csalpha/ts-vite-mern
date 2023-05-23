@@ -7,13 +7,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import "./index.css";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { StoreProvider } from "./Store";
 
 // Create a browser router instance
 const router = createBrowserRouter(
@@ -36,17 +36,20 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // The app is wrapped in React.StrictMode for additional development checks.
   <React.StrictMode>
-    {/* The Helmet component is used to manage the document head elements */}
-    <HelmetProvider>
-      {/* The QueryClientProvider component is used to provide the queryClient instance */}
-      <QueryClientProvider client={queryClient}>
-        {/* The RouterProvider component is used to provide the router instance  */}
-        <RouterProvider router={router} />
-        {/* The ReactQueryDevtools component provides a UI for inspecting and debugging React Query */}
-        <ReactQueryDevtools
-          initialIsOpen={false} // The initialIsOpen prop is set to false to keep the devtools closed by default.
-        />
-      </QueryClientProvider>
-    </HelmetProvider>
+    {/* Wrap the app with the StoreProvider component to provide the store */}
+    <StoreProvider>
+      {/* The Helmet component is used to manage the document head elements */}
+      <HelmetProvider>
+        {/* The QueryClientProvider component is used to provide the queryClient instance */}
+        <QueryClientProvider client={queryClient}>
+          {/* The RouterProvider component is used to provide the router instance  */}
+          <RouterProvider router={router} />
+          {/* The ReactQueryDevtools component provides a UI for inspecting and debugging React Query */}
+          <ReactQueryDevtools
+            initialIsOpen={false} // The initialIsOpen prop is set to false to keep the devtools closed by default.
+          />
+        </QueryClientProvider>
+      </HelmetProvider>
+    </StoreProvider>
   </React.StrictMode>
 );
