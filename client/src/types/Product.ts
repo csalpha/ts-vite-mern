@@ -1,5 +1,6 @@
 // Define a custom type for Product
 export type Product = {
+  _id: string;
   name: string; // The name of the product
   slug: string; // The slug (URL-friendly version) of the product name
   category: string; // The category to which the product belongs

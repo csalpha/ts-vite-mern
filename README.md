@@ -96,3 +96,11 @@
     8. create productRouter.ts
     9. edit index.ts
     10. create seedRouter.ts
+
+13. Implement Add To Cart
+
+    1. Cart.ts
+    2. Store.js
+    3. App.tsx
+    4. utils.ts
+    5. ProductItem.ts
