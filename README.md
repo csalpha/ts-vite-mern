@@ -83,3 +83,16 @@
     4. Set the theme based on the mode in App.tsx
     5. Define a switchModeHandler function
     6. Render a switchModeHandler button
+
+12. Connect To MongoDB
+
+    1. create mongodb database
+    2. npm install dotenv mongoose @typegoose/typegoose
+    3. put mongodb uri in .env
+    4. MONGODB_URI=mongodb://localhost/tsmernamazona
+    5. edit index.ts
+    6. create models/productModel
+    7. npm i express-async-handler
+    8. create productRouter.ts
+    9. edit index.ts
+    10. create seedRouter.ts

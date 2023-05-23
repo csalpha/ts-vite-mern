@@ -22,6 +22,6 @@ export const useGetProductDetailsBySlugQuery = (slug: string) =>
     queryKey: ["products", slug],
     // Asynchronous query function to fetch the product details
     queryFn: async () =>
-      // Make an HTTP GET request to the api/products/${slug} endpoint using the apiClient
-      (await apiClient.get<Product>(`api/products/${slug}`)).data,
+      // Make an HTTP GET request to the `api/products/slug/${slug}` endpoint using the apiClient
+      (await apiClient.get<Product>(`api/products/slug/${slug}`)).data,
   });
