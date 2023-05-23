@@ -2,6 +2,9 @@ import { useContext, useEffect } from "react";
 import { Badge, Button, Container, Nav, Navbar } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 import { Store } from "./Store";
+import { LinkContainer } from "react-router-bootstrap";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   // Access the state and dispatch function from the store using useContext
@@ -25,11 +28,14 @@ const App = () => {
 
   return (
     <div className='d-flex flex-column vh-100'>
+      <ToastContainer position='bottom-center' limit={1} />
       {/* Header */}
       <header>
         <Navbar expand='lg'>
           <Container>
-            <Navbar.Brand>ts vite</Navbar.Brand>
+            <LinkContainer to='/'>
+              <Navbar.Brand>ts vite</Navbar.Brand>
+            </LinkContainer>
           </Container>
           <Nav>
             {/* Switch mode button */}

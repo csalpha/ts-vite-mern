@@ -1,13 +1,16 @@
 // Importing required dependencies and components
+import { useContext } from "react";
 import { Badge, Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
 import { useGetProductDetailsBySlugQuery } from "../hooks/productHooks";
 import { ApiError } from "../types/ApiError";
-import { getError } from "../utils";
+import { convertProductToCartItem, getError } from "../utils";
+import { Store } from "../Store";
 
 export default function ProductPage() {
   //The useParams hook from React Router is used to get the slug parameter from the URL.
@@ -20,6 +23,38 @@ export default function ProductPage() {
     isLoading,
     error,
   } = useGetProductDetailsBySlugQuery(slug!);
+
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+
+  const navigate = useNavigate();
+
+  // Function to handle adding a product to the cart
+  const addToCartHandler = () => {
+    // Check if the product already exists in the cart
+    const existItem = cart.cartItems.find((x) => x._id === product!._id);
+
+    // Calculate the new quantity of the product
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+
+    // Check if the product is out of stock
+    if (product!.countInStock < quantity) {
+      toast.warn("Sorry. Product is out of stock");
+      return;
+    }
+
+    // Dispatch an action to add the product to the cart
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...convertProductToCartItem(product!), quantity },
+    });
+
+    // Show a success message
+    toast.success("Product added to the cart");
+
+    // Navigate to the cart page (optional)
+    // navigate("/cart");
+  };
 
   // Conditional rendering is used to handle different scenarios:
   // loading state, error state, product not found, and successful retrieval of product details.
@@ -89,7 +124,9 @@ export default function ProductPage() {
                   <ListGroup.Item>
                     <div className='d-grid'>
                       {/* Add to Cart button */}
-                      <Button variant='primary'>Add to Cart</Button>
+                      <Button onClick={addToCartHandler} variant='primary'>
+                        Add to Cart
+                      </Button>
                     </div>
                   </ListGroup.Item>
                 )}
