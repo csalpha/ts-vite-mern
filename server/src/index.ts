@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { productRouter } from "./routers/productRouter";
 import { seedRouter } from "./routers/seedRouter";
+import { userRouter } from "./routers/userRouter";
 
 /* This is a setup for an Express server with CORS enabled, allowing requests from "http://localhost:5173". 
 The server listens on port 4000 */
@@ -34,14 +35,28 @@ app.use(
   })
 );
 
-app.use("/api/products", productRouter);
+// This middleware parses incoming requests with JSON payloads.
+// It enables the server to interpret JSON data sent in the request body
+// and make it available as req.body in route handlers.
+app.use(express.json());
+
+// This middleware parses incoming requests with URL-encoded payloads.
+// It allows the server to interpret form data sent in the request body
+// and make it available as req.body in route handlers.
+// The extended: true option allows for nested objects in the URL-encoded data.
+app.use(express.urlencoded({ extended: true }));
+
 // Mount the productRouter middleware at the "/api/products" path. This will handle routes related to products.
+app.use("/api/products", productRouter);
 
-app.use("/api/seed", seedRouter);
+// Mount the userRouter middleware at the "/api/users" path. This will handle routes related to users.
+app.use("/api/users", userRouter);
+
 // Mount the seedRouter middleware at the "/api/seed" path. This will handle routes related to seeding data.
+app.use("/api/seed", seedRouter);
 
-const PORT = 4000;
 // Set the port number for the server to listen on.
+const PORT = 4000;
 
 // Start the server and listen on the specified port
 app.listen(PORT, () => {

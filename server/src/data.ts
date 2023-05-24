@@ -1,4 +1,7 @@
-import { Product } from "./types/Product";
+import bcrypt from "bcryptjs";
+import { User } from "./models/userModel";
+import { Product } from "./models/productModel";
+// // import { Product } from "./types/Product";
 
 /*   The products array contains a list of product objects, each representing a different product. 
 Each object has properties such as name, slug, category, image, price, countInStock, brand, rating, 
@@ -65,5 +68,36 @@ export const products: Product[] = [
     rating: 4.8,
     numReviews: 5,
     description: "high quality product",
+  },
+];
+
+export const users: User[] = [
+  {
+    name: "Carlos",
+    email: "carlos@mail.com",
+    password: bcrypt.hashSync("1234", 8),
+    isAdmin: true,
+    isSeller: true,
+  },
+  {
+    name: "Ana",
+    email: "ana@mail.com",
+    password: bcrypt.hashSync("1234", 8),
+    isAdmin: false,
+    isSeller: true,
+  },
+  {
+    name: "Joana",
+    email: "joana@mail.com",
+    password: bcrypt.hashSync("1234", 8),
+    isAdmin: false,
+    isSeller: true,
+  },
+  {
+    name: "Sofia",
+    email: "sofia@mail.com",
+    password: bcrypt.hashSync("1234", 8),
+    isAdmin: false,
+    isSeller: false,
   },
 ];

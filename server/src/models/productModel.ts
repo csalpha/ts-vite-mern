@@ -7,7 +7,7 @@ import { modelOptions, prop, getModelForClass } from "@typegoose/typegoose";
 
 //The Product class represents a product and defines its properties using the @prop decorator.
 export class Product {
-  public _id!: string;
+  public _id?: string;
 
   // Define the name property with required validation
   @prop({ required: true })

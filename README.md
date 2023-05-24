@@ -119,5 +119,17 @@
     2. Create CartPage route in main.tsx
 
 16. Implement Remove From Cart
+
     1. Define removeItemHandler in CartPage.tsx
     2. Implement the CART_REMOVE_ITEM in Store.tsx
+
+17. Create User Signin Api
+
+    1. npm i bcryptjs
+    2. npm i jsonwebtoken
+    3. npm i @types/bcryptjs
+    4. npm i @types/jsonwebtoken
+    5. data.tsx
+    6. Create userModel.ts
+    7. Create userRouter.ts
+    8. Create Request.ts
