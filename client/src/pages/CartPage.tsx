@@ -37,6 +37,11 @@ const CartPage = () => {
     navigate("/signin?redirect=/shipping");
   };
 
+  const removeItemHandler = (item: CartItem) => {
+    // Dispatch the action to remove the item from the cart
+    dispatch({ type: "CART_REMOVE_ITEM", payload: item });
+  };
+
   return (
     <div>
       <Helmet>
@@ -89,7 +94,10 @@ const CartPage = () => {
                     <Col md={3}>€{item.price}</Col>
                     <Col md={2}>
                       {/* Render Remove item button */}
-                      <Button variant={mode}>
+                      <Button
+                        variant={mode}
+                        onClick={() => removeItemHandler(item)}
+                      >
                         <i className='fas fa-trash'></i>
                       </Button>
                     </Col>

@@ -117,3 +117,7 @@
 
     1. CartPage.tsx
     2. Create CartPage route in main.tsx
+
+16. Implement Remove From Cart
+    1. Define removeItemHandler in CartPage.tsx
+    2. Implement the CART_REMOVE_ITEM in Store.tsx

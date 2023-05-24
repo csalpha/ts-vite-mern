@@ -42,7 +42,8 @@ const initialState: AppState = {
 // Define the action type
 type Action =
   | { type: "SWITCH_MODE" }
-  | { type: "CART_ADD_ITEM"; payload: CartItem };
+  | { type: "CART_ADD_ITEM"; payload: CartItem }
+  | { type: "CART_REMOVE_ITEM"; payload: CartItem };
 
 // Define the reducer function
 const reducer = (state: AppState, action: Action): AppState => {
@@ -73,6 +74,18 @@ const reducer = (state: AppState, action: Action): AppState => {
 
       // Return the updated state with the updated cart items
       return { ...state, cart: { ...state.cart, cartItems } };
+    case "CART_REMOVE_ITEM": {
+      // Filter out the item to be removed from the cartItems array
+      const cartItems = state.cart.cartItems.filter(
+        (item: CartItem) => item._id !== action.payload._id
+      );
+
+      // Update the cartItems in localStorage
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+      // Return a new state object with updated cartItems
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
 
     // If the dispatched action type doesn't match any case,
     default:
