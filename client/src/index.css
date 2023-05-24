@@ -35,3 +35,8 @@ img.thumbnail {
   /* Set the height to 80px */
   height: 80px;
 }
+
+small-container {
+  /* Set the maximum width of small-container */
+  max-width: 600px;
+}

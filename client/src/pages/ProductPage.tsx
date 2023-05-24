@@ -12,7 +12,7 @@ import { ApiError } from "../types/ApiError";
 import { convertProductToCartItem, getError } from "../utils";
 import { Store } from "../Store";
 
-export default function ProductPage() {
+const ProductPage = () => {
   //The useParams hook from React Router is used to get the slug parameter from the URL.
   const params = useParams();
   const { slug } = params;
@@ -137,4 +137,6 @@ export default function ProductPage() {
       </Row>
     </div>
   );
-}
+};
+
+export default ProductPage;

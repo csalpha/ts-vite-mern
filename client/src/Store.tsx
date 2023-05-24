@@ -1,10 +1,12 @@
 import React from "react";
 import { Cart, CartItem } from "./types/Cart";
+import { UserInfo } from "./types/UserInfo";
 
 // Define the shape of the app state
 type AppState = {
   mode: string;
   cart: Cart;
+  userInfo?: UserInfo;
 };
 
 /* This logic allows the app to determine the initial mode based on the user's preferences
@@ -12,6 +14,9 @@ type AppState = {
 
 // Set the initial state of the app
 const initialState: AppState = {
+  userInfo: localStorage.getItem("userInfo") // Checks if there is a stored value for the key "userInfo" in the localStorage
+    ? JSON.parse(localStorage.getItem("userInfo")!) // If there is a stored value, it parses the value from JSON format to an object
+    : null, // If there is no stored value, it assigns null to the 'userInfo' property
   // the mode property represents the current mode of the app (either "dark" or "light").
   mode: localStorage.getItem("mode") // checks if there is a stored mode in the local storage
     ? // If it exists,
@@ -43,7 +48,9 @@ const initialState: AppState = {
 type Action =
   | { type: "SWITCH_MODE" }
   | { type: "CART_ADD_ITEM"; payload: CartItem }
-  | { type: "CART_REMOVE_ITEM"; payload: CartItem };
+  | { type: "CART_REMOVE_ITEM"; payload: CartItem }
+  | { type: "USER_SIGNIN"; payload: UserInfo }
+  | { type: "USER_SIGNOUT" };
 
 // Define the reducer function
 const reducer = (state: AppState, action: Action): AppState => {
@@ -86,6 +93,32 @@ const reducer = (state: AppState, action: Action): AppState => {
       // Return a new state object with updated cartItems
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "USER_SIGNIN":
+      return { ...state, userInfo: action.payload }; // Updates the state by merging the existing 'state' object with a new 'userInfo' property taken from the 'action' payload
+
+    case "USER_SIGNOUT":
+      return {
+        mode:
+          window.matchMedia && // Sets the 'mode' property of the state based on the user's preferred color scheme (dark or light)
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light",
+        cart: {
+          cartItems: [], // Resets the cart items to an empty array
+          paymentMethod: "PayPal", // Resets the payment method to "PayPal"
+          shippingAddress: {
+            fullName: "", // Resets the full name in the shipping address to an empty string
+            address: "", // Resets the address in the shipping address to an empty string
+            postalCode: "", // Resets the postal code in the shipping address to an empty string
+            city: "", // Resets the city in the shipping address to an empty string
+            country: "", // Resets the country in the shipping address to an empty string
+          },
+          itemsPrice: 0, // Resets the total price of items in the cart to 0
+          shippingPrice: 0, // Resets the shipping price to 0
+          taxPrice: 0, // Resets the tax price to 0
+          totalPrice: 0, // Resets the total price of the cart to 0
+        },
+      };
 
     // If the dispatched action type doesn't match any case,
     default:
