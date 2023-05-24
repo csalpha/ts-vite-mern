@@ -90,7 +90,7 @@ export default function ProductPage() {
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>
-            <ListGroup.Item>Price : {product.price} euros</ListGroup.Item>
+            <ListGroup.Item>Price : {product.price} €</ListGroup.Item>
             <ListGroup.Item>
               Description:
               <p>{product.description}</p>
@@ -104,7 +104,7 @@ export default function ProductPage() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Price:</Col>
-                    <Col>{product.price} euros</Col>
+                    <Col>{product.price} €</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>

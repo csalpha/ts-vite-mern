@@ -112,3 +112,8 @@
     3. npm i @types/react-router-bootstrap
     4. Use Context in ProductPage.ts
     5. Define the addToCartHandler function in in ProductPage.ts
+
+15. Create Cart Page
+
+    1. CartPage.tsx
+    2. Create CartPage route in main.tsx

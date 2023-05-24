@@ -59,7 +59,7 @@ const ProductItem = (
         </Link>
         {/* The Rating component is rendered */}
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>${product.price}</Card.Text>
+        <Card.Text>{product.price} €</Card.Text>
         {/* if countInStock is 0 */}
         {product.countInStock === 0 ? (
           // "Out of stock" button is rendered

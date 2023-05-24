@@ -30,3 +30,8 @@ img.large {
   /* Set the maximum width of large images */
   max-width: 100%;
 }
+
+img.thumbnail {
+  /* Set the height to 80px */
+  height: 80px;
+}
