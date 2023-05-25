@@ -139,3 +139,10 @@
     1. Create userHooks.ts
     2. Create SigninPage.tsx
     3. Create SigninPage route in main.tsx
+
+19. Create Signup Page
+
+    1. Define a route handler for the POST request to the /signup endpoint ( userRouter.ts )
+    2. Define useSignupMutation in ( userHooks.ts )
+    3. Create SignunPage.tsx
+    4. Define SignupPage route ( main.tsx )

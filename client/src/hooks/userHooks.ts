@@ -21,3 +21,26 @@ export const useSigninMutation = () =>
         })
       ).data, // It expects a response of type 'UserInfo' and returns the 'data' property from the response.
   });
+
+// Exporting a custom hook named useSignupMutation
+export const useSignupMutation = () =>
+  useMutation({
+    // Defining the mutation function
+    mutationFn: async ({
+      name,
+      email,
+      password,
+    }: {
+      name: string;
+      email: string;
+      password: string;
+    }) =>
+      // Makes an asynchronous a POST request to the server's 'signup' API endpoint with the provided name, email and password.
+      (
+        await apiClient.post<UserInfo>(`api/users/signup`, {
+          name,
+          email,
+          password,
+        })
+      ).data, // It expects a response of type 'UserInfo' and returns the 'data' property from the response.
+  });
