@@ -55,14 +55,17 @@ type Action =
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
   | { type: "USER_SIGNIN"; payload: UserInfo }
   | { type: "USER_SIGNOUT" }
-  | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress };
+  | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress }
+  | { type: "SAVE_PAYMENT_METHOD"; payload: string };
 
 // Define the reducer function
 const reducer = (state: AppState, action: Action): AppState => {
   // determine the action type and perform the corresponding state update.
   switch (action.type) {
     case "SWITCH_MODE":
-      return { ...state, mode: state.mode === "dark" ? "light" : "dark" };
+      localStorage.setItem("mode", state.mode === "dark" ? "light" : "dark"); // Setting the "mode" value in localStorage to "light" if the current mode is "dark", and vice versa
+      return { ...state, mode: state.mode === "dark" ? "light" : "dark" }; // Creating a new object by spreading the state object and updating the mode property with the switched mode value
+
     case "CART_ADD_ITEM":
       // Get the new item from the action payload
       const newItem = action.payload;
@@ -133,7 +136,11 @@ const reducer = (state: AppState, action: Action): AppState => {
           shippingAddress: action.payload, // Update the shippingAddress property with the new payload
         },
       };
-
+    case "SAVE_PAYMENT_METHOD":
+      return {
+        ...state, // Creating a new object by spreading the state object
+        cart: { ...state.cart, paymentMethod: action.payload }, // Updating the cart property of the new object with the updated paymentMethod value from the action payload
+      };
     // If the dispatched action type doesn't match any case,
     default:
       // the current state is returned unchanged.

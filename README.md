@@ -153,3 +153,9 @@
     2. Create CheckoutSteps.ts
     3. Create ShippingAddressPage.ts
     4. Create Shipping route in main.tsx
+
+21. Create Payment Page
+
+    1. Define the action type (SAVE_PAYMENT_METHOD) and the corresponding state in Store.tsx
+    2. Create the PaymentMethodPage.ts
+    3. Create payment route in main.tsx
