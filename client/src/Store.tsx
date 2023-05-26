@@ -1,5 +1,5 @@
 import React from "react";
-import { Cart, CartItem } from "./types/Cart";
+import { Cart, CartItem, ShippingAddress } from "./types/Cart";
 import { UserInfo } from "./types/UserInfo";
 
 // Define the shape of the app state
@@ -28,15 +28,19 @@ const initialState: AppState = {
       "dark" // the mode is set to "dark"
     : "light", // Otherwise, it is set to "light".
   cart: {
+    // Retrieve cart items from local storage or initialize an empty array
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems")!)
       : [],
+    // Retrieve shipping address from local storage or initialize an empty object
     shippingAddress: localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress")!)
       : {},
+    // Retrieve payment method from local storage or set it to "PayPal" by default
     paymentMethod: localStorage.getItem("paymentMethod")
       ? localStorage.getItem("paymentMethod")!
       : "PayPal",
+    // Initialize prices to 0
     itemsPrice: 0,
     shippingPrice: 0,
     taxPrice: 0,
@@ -50,7 +54,8 @@ type Action =
   | { type: "CART_ADD_ITEM"; payload: CartItem }
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
   | { type: "USER_SIGNIN"; payload: UserInfo }
-  | { type: "USER_SIGNOUT" };
+  | { type: "USER_SIGNOUT" }
+  | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress };
 
 // Define the reducer function
 const reducer = (state: AppState, action: Action): AppState => {
@@ -117,6 +122,15 @@ const reducer = (state: AppState, action: Action): AppState => {
           shippingPrice: 0, // Resets the shipping price to 0
           taxPrice: 0, // Resets the tax price to 0
           totalPrice: 0, // Resets the total price of the cart to 0
+        },
+      };
+    case "SAVE_SHIPPING_ADDRESS":
+      // Update the state by merging the new shipping address into the cart object
+      return {
+        ...state, // Spread the current state object
+        cart: {
+          ...state.cart, // Spread the current cart object
+          shippingAddress: action.payload, // Update the shippingAddress property with the new payload
         },
       };
 

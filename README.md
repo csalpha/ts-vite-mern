@@ -146,3 +146,10 @@
     2. Define useSignupMutation in ( userHooks.ts )
     3. Create SignunPage.tsx
     4. Define SignupPage route ( main.tsx )
+
+20. Create Shipping Page
+
+    1. Define the action type (SAVE_SHIPPING_ADDRESS) and the corresponding state in Store.tsx
+    2. Create CheckoutSteps.ts
+    3. Create ShippingAddressPage.ts
+    4. Create Shipping route in main.tsx
