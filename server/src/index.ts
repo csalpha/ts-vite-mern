@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import { productRouter } from "./routers/productRouter";
 import { seedRouter } from "./routers/seedRouter";
 import { userRouter } from "./routers/userRouter";
+import { orderRouter } from "./routers/orderRouter";
 
 /* This is a setup for an Express server with CORS enabled, allowing requests from "http://localhost:5173". 
 The server listens on port 4000 */
@@ -51,6 +52,9 @@ app.use("/api/products", productRouter);
 
 // Mount the userRouter middleware at the "/api/users" path. This will handle routes related to users.
 app.use("/api/users", userRouter);
+
+// Mount the orderRouter middleware at the "/api/orders" path. This will handle routes related to orders.
+app.use("/api/orders", orderRouter);
 
 // Mount the seedRouter middleware at the "/api/seed" path. This will handle routes related to seeding data.
 app.use("/api/seed", seedRouter);

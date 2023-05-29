@@ -159,3 +159,10 @@
     1. Define the action type (SAVE_PAYMENT_METHOD) and the corresponding state in Store.tsx
     2. Create the PaymentMethodPage.ts
     3. Create payment route in main.tsx
+
+22. Build Order Api
+
+    1. orderModel.tsx
+    2. orderRouter.ts
+    3. index.tsx
+    4. utils.js
