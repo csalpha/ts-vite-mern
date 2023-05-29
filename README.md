@@ -175,3 +175,10 @@
     4. orderHooks.tsx
     5. PlaceOrderPage.ts
     6. main.tsx
+
+24. Create Order Page
+
+    1. orderRouter.ts
+    2. orderHooks.tsx
+    3. OrderPage.tsx
+    4. main.tsx

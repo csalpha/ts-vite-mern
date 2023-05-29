@@ -5,6 +5,20 @@ import { Product } from "../models/productModel";
 import { isAuth } from "../utils";
 export const orderRouter = express.Router();
 
+orderRouter.get(
+  "/:id", // Route path with a parameter ":id" representing the order ID
+  isAuth, // Middleware function to check if the user is authenticated
+  asyncHandler(async (req: Request, res: Response) => {
+    // Route handler function
+    const order = await OrderModel.findById(req.params.id); // Retrieve the order from the database using the ID
+    if (order) {
+      res.json(order); // If the order is found, send the order details as a JSON response
+    } else {
+      res.status(404).json({ message: "Order Not Found" }); // If the order is not found, send a 404 status code with a JSON response containing an error message
+    }
+  })
+);
+
 // Handle POST request for '/api/orders'
 orderRouter.post(
   "/",
