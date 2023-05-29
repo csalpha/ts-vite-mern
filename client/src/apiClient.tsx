@@ -16,6 +16,23 @@ const apiClient = axios.create({
   },
 });
 
+// Adding a request interceptor to the apiClient
+apiClient.interceptors.request.use(
+  async (config) => {
+    // Check if userInfo is stored in localStorage
+    if (localStorage.getItem("userInfo"))
+      // Attach the authorization header with the token from localStorage
+      config.headers.authorization = `Bearer ${
+        JSON.parse(localStorage.getItem("userInfo")!).token
+      }`;
+    return config;
+  },
+  (error) => {
+    // Reject the Promise if an error occurs
+    Promise.reject(error);
+  }
+);
+
 // The apiClient instance is exported as the default export,
 // allowing it to be used in other parts of the application to make HTTP requests.
 export default apiClient;

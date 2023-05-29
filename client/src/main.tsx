@@ -19,6 +19,8 @@ import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
 import ShippingAddressPage from "./pages/ShippingAddressPage";
 import PaymentMethodPage from "./pages/PaymentMethodPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PlaceOrderPage from "./pages/PlaceOrderPage";
 
 // Create a browser router instance
 const router = createBrowserRouter(
@@ -34,8 +36,11 @@ const router = createBrowserRouter(
       <Route path='cart' element={<CartPage />} />
       <Route path='signin' element={<SigninPage />} />
       <Route path='signup' element={<SignupPage />} />
-      <Route path='shipping' element={<ShippingAddressPage />} />
-      <Route path='payment' element={<PaymentMethodPage />} />
+      <Route path='' element={<ProtectedRoute />}>
+        <Route path='shipping' element={<ShippingAddressPage />} />
+        <Route path='payment' element={<PaymentMethodPage />} />
+        <Route path='placeorder' element={<PlaceOrderPage />} />
+      </Route>
     </Route>
   )
 );

@@ -166,3 +166,12 @@
     2. orderRouter.ts
     3. index.tsx
     4. utils.js
+
+23. Create Place Order Page
+
+    1. ProtectedRoute.tsx
+    2. main.tsx
+    3. apiClient.ts
+    4. orderHooks.tsx
+    5. PlaceOrderPage.ts
+    6. main.tsx

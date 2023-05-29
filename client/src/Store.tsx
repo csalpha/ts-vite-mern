@@ -53,6 +53,7 @@ type Action =
   | { type: "SWITCH_MODE" }
   | { type: "CART_ADD_ITEM"; payload: CartItem }
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
+  | { type: "CART_CLEAR" }
   | { type: "USER_SIGNIN"; payload: UserInfo }
   | { type: "USER_SIGNOUT" }
   | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress }
@@ -100,7 +101,11 @@ const reducer = (state: AppState, action: Action): AppState => {
 
       // Return a new state object with updated cartItems
       return { ...state, cart: { ...state.cart, cartItems } };
-    }
+    } // Handling the "CART_CLEAR" action in the reducer
+    case "CART_CLEAR":
+      // Create a new state object with the existing state properties
+      // and update the cartItems array to be an empty array
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     case "USER_SIGNIN":
       return { ...state, userInfo: action.payload }; // Updates the state by merging the existing 'state' object with a new 'userInfo' property taken from the 'action' payload
 
