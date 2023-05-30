@@ -10,6 +10,30 @@ export const useGetOrderDetailsQuery = (id: string) =>
     queryFn: async () => (await apiClient.get<Order>(`api/orders/${id}`)).data,
   });
 
+// Custom hook: useGetPaypalClientIdQuery
+// Description: Performs a query to retrieve the PayPal client ID from the server
+export const useGetPaypalClientIdQuery = () =>
+  useQuery({
+    queryKey: ["paypal-clientId"],
+    queryFn: async () =>
+      (await apiClient.get<{ clientId: string }>(`/api/keys/paypal`)).data,
+  });
+
+// Custom hook: usePayOrderMutation
+// Description: Performs a mutation to mark an order as paid on the server
+export const usePayOrderMutation = () =>
+  useMutation({
+    // Defining the mutation function
+    mutationFn: async (details: { orderId: string }) =>
+      // Sending a PUT request to upadate the order using the apiClient
+      (
+        await apiClient.put<{ message: string; order: Order }>(
+          `api/orders/${details.orderId}/pay`,
+          details
+        )
+      ).data,
+  });
+
 // Creating a custom mutation hook called useCreateOrderMutation
 export const useCreateOrderMutation = () =>
   useMutation({

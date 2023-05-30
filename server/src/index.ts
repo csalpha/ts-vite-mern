@@ -1,3 +1,4 @@
+// import necessary dependencies
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
@@ -6,6 +7,7 @@ import { productRouter } from "./routers/productRouter";
 import { seedRouter } from "./routers/seedRouter";
 import { userRouter } from "./routers/userRouter";
 import { orderRouter } from "./routers/orderRouter";
+import { keyRouter } from "./routers/keyRouter";
 
 /* This is a setup for an Express server with CORS enabled, allowing requests from "http://localhost:5173". 
 The server listens on port 4000 */
@@ -58,6 +60,10 @@ app.use("/api/orders", orderRouter);
 
 // Mount the seedRouter middleware at the "/api/seed" path. This will handle routes related to seeding data.
 app.use("/api/seed", seedRouter);
+
+// Mount the keyRouter middleware at the "/api/keys" path.
+// This means that any requests starting with "/api/keys" will be handled by the keyRouter.
+app.use("/api/keys", keyRouter);
 
 // Set the port number for the server to listen on.
 const PORT = 4000;

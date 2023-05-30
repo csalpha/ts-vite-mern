@@ -1,14 +1,19 @@
+// import necessary dependencies
 import express, { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import { OrderModel } from "../models/orderModel";
 import { Product } from "../models/productModel";
 import { isAuth } from "../utils";
+
+// Create an express router
 export const orderRouter = express.Router();
 
+// Handle GET request for '/:id' route
 orderRouter.get(
   "/:id", // Route path with a parameter ":id" representing the order ID
   isAuth, // Middleware function to check if the user is authenticated
-  asyncHandler(async (req: Request, res: Response) => {
+  asyncHandler(
+    async (req: Request, res: Response) => {
     // Route handler function
     const order = await OrderModel.findById(req.params.id); // Retrieve the order from the database using the ID
     if (order) {
@@ -62,5 +67,38 @@ orderRouter.get(
     // Retrieve all orders from the database
     const orders = await OrderModel.find();
     res.json(orders); // return orders as JSON response
+  })
+);
+
+// Handle PUT request for '/api/orders/:id/pay'
+orderRouter.put(
+  "/:id/pay", // Route path with a parameter ":id" representing the order ID
+  isAuth, // Middleware function to check if the user is authenticated
+  asyncHandler(async (req: Request, res: Response) => { // Route handler function
+    // Find the order by ID
+    const order = await OrderModel.findById(req.params.id);
+
+    // Check if the order exists
+    if (order) {
+      // Update the order properties
+      order.isPaid = true;
+      order.paidAt = new Date(Date.now());
+      // Assign the paymentResult field of the order document to the paymentResult field of the request body
+      order.paymentResult = {
+        paymentId: req.body.id,
+        status: req.body.status,
+        update_time: req.body.update_time,
+        email_address: req.body.email_address,
+      };
+
+      // Save the updated order
+      const updatedOrder = await order.save();
+
+      // Send the response
+      res.send({ order: updatedOrder, message: "Order Paid Successfully" });
+    } else {
+      // If order is not found, return a 404 error
+      res.status(404).json({ message: "Order Not Found" });
+    }
   })
 );

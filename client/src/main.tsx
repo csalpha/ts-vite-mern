@@ -22,6 +22,7 @@ import PaymentMethodPage from "./pages/PaymentMethodPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import OrderPage from "./pages/OrderPage";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 // Create a browser router instance
 const router = createBrowserRouter(
@@ -55,18 +56,21 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     {/* Wrap the app with the StoreProvider component to provide the store */}
     <StoreProvider>
-      {/* The Helmet component is used to manage the document head elements */}
-      <HelmetProvider>
-        {/* The QueryClientProvider component is used to provide the queryClient instance */}
-        <QueryClientProvider client={queryClient}>
-          {/* The RouterProvider component is used to provide the router instance  */}
-          <RouterProvider router={router} />
-          {/* The ReactQueryDevtools component provides a UI for inspecting and debugging React Query */}
-          <ReactQueryDevtools
-            initialIsOpen={false} // The initialIsOpen prop is set to false to keep the devtools closed by default.
-          />
-        </QueryClientProvider>
-      </HelmetProvider>
+      {/* The PayPalScriptProvider component is used to load the PayPal script. */}
+      <PayPalScriptProvider options={{ "client-id": "sb" }} deferLoading={true}>
+        {/* The Helmet component is used to manage the document head elements */}
+        <HelmetProvider>
+          {/* The QueryClientProvider component is used to provide the queryClient instance */}
+          <QueryClientProvider client={queryClient}>
+            {/* The RouterProvider component is used to provide the router instance  */}
+            <RouterProvider router={router} />
+            {/* The ReactQueryDevtools component provides a UI for inspecting and debugging React Query */}
+            <ReactQueryDevtools
+              initialIsOpen={false} // The initialIsOpen prop is set to false to keep the devtools closed by default.
+            />
+          </QueryClientProvider>
+        </HelmetProvider>
+      </PayPalScriptProvider>
     </StoreProvider>
   </React.StrictMode>
 );

@@ -1,3 +1,4 @@
+// importing necessary packages and components
 import { useContext } from "react";
 import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
@@ -9,32 +10,37 @@ import { CartItem } from "../types/Cart";
 
 // CartPage component
 const CartPage = () => {
+  // creating a navigate function to navigate to a different page
   const navigate = useNavigate();
 
   // Accessing state and dispatch function from the Store context
   const {
     state: {
-      mode,
-      cart: { cartItems },
+      mode, // dark or light mode
+      cart: { cartItems }, // cart items
     },
-    dispatch,
-  } = useContext(Store);
+    dispatch, // dispatch function
+  } = useContext(Store); // Store context
 
   // Function to update the quantity of an item in the cart
   const updateCartHandler = (item: CartItem, quantity: number) => {
+    // Check if the quantity is 0
     if (item.countInStock < quantity) {
+      // Display a toast message if the quantity is 0
       toast.warn("Sorry. Product is out of stock");
+      // Return from the function
       return;
     }
+    // Dispatch the action to update the quantity of the item in the cart
     dispatch({
-      type: "CART_ADD_ITEM",
-      payload: { ...item, quantity },
+      type: "CART_ADD_ITEM", // action type
+      payload: { ...item, quantity }, // payload
     });
   };
 
   // Function to handle the checkout process
   const checkoutHandler = () => {
-    navigate("/signin?redirect=/shipping");
+    navigate("/signin?redirect=/shipping"); // Navigate to the signin page
   };
 
   const removeItemHandler = (item: CartItem) => {
@@ -142,3 +148,4 @@ const CartPage = () => {
 };
 
 export default CartPage;
+

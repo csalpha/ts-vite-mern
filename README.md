@@ -182,3 +182,17 @@
     2. orderHooks.tsx
     3. OrderPage.tsx
     4. main.tsx
+
+25. Pay Order By PayPal
+
+    1. Create PayPal Developer Account
+    2. Get PayPal Client Id
+    3. Save in .env as PAYPAL_CLIENT_ID
+    4. keyRouter.ts
+    5. index.ts
+    6. orderRouter.ts
+    7. orderHooks.ts
+    8. npm i @paypal/react-paypal-js
+    9. main.tsx
+    10. OrderPage.tsx
+
