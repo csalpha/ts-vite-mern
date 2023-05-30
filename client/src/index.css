@@ -49,3 +49,8 @@ small-container {
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
 }
+
+.dropdown-menu[data-bs-popper] {
+  left: auto;
+  right: 0;
+}

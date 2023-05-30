@@ -51,8 +51,7 @@ class PaymentResult {
 }
 
 // Add options to the schema, in this case, enabling timestamps for createdAt and updatedAt fields
-modelOptions({ schemaOptions: { timestamps: true } });
-
+@modelOptions({ schemaOptions: { timestamps: true } })
 export class Order {
   public _id!: string; // Order ID
   @prop()

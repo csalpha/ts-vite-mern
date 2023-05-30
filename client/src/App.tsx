@@ -71,7 +71,14 @@ const App = () => {
             </Link>
             {userInfo ? (
               // Condition: If userInfo exists (user is signed in)
-              <NavDropdown title={userInfo.name} id='basic-nav-dropdown'>
+              <NavDropdown
+              title={userInfo.name}
+              id="basic-nav-dropdown"
+              className="dropdown-menu-start"
+            >
+              <LinkContainer to="/orderhistory">
+                <NavDropdown.Item>Order History</NavDropdown.Item>
+              </LinkContainer>
                 {/* Render a NavDropdown component */}
                 <Link
                   className='dropdown-item'

@@ -55,3 +55,14 @@ export const useCreateOrderMutation = () =>
         )
       ).data,
   });
+
+// Creating a custom query hook called useGetOrderHistoryQuery
+  export const useGetOrderHistoryQuery = () =>
+
+  useQuery({
+    queryKey: ['order-history'], // Setting the query key
+    // Defining the query function
+    queryFn: async () =>
+      // Sending a GET request to retrieve the order history from the server using the apiClient
+      (await apiClient.get<Order[]>(`/api/orders/mine`)).data,
+  })

@@ -1,12 +1,24 @@
 // import necessary dependencies
 import express, { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
-import { OrderModel } from "../models/orderModel";
+import { Order,OrderModel } from "../models/orderModel";
 import { Product } from "../models/productModel";
 import { isAuth } from "../utils";
 
 // Create an express router
 export const orderRouter = express.Router();
+
+// Handle GET request for '/api/orders/mine'
+orderRouter.get(
+  '/mine', // Route path
+  isAuth, // Middleware function to check if the user is authenticated
+  // Route handler function
+  asyncHandler(async (req: Request, res: Response) => {
+    // Retrieve all orders from the database where the user ID of the order document matches the user ID of the authenticated user
+    const orders = await OrderModel.find({ user: req.user._id }) 
+    res.json(orders) // Return the orders as a JSON response
+  })
+)
 
 // Handle GET request for '/:id' route
 orderRouter.get(
@@ -52,7 +64,7 @@ orderRouter.post(
         totalPrice: req.body.totalPrice,
         // Assign the user ID of the authenticated user (stored in req.user._id) to the user field of the order document
         user: req.user._id,
-      });
+      } as Order); // Cast the created order to the Order type
 
       // Return a JSON response with a success message and the created order details
       res.status(201).json({ message: "Order Created", order: createdOrder });
