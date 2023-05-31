@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 import { User, UserModel } from "../models/userModel";
-import { generateToken } from "../utils";
+import { generateToken, isAuth } from "../utils";
 
 // Create an instance of the Express Router
 export const userRouter = express.Router();
@@ -67,3 +67,34 @@ userRouter.post(
     });
   })
 );
+
+// defines a route handler for the PUT request to the /profile endpoint
+userRouter.put(
+  '/profile', // define the path for the route
+  isAuth, // authenticate the user using the isAuth middleware
+  asyncHandler(async (req: Request, res: Response) => { // define the route handler callback function
+    const user = await UserModel.findById(req.user._id) // find the user in the database by its _id
+    // if the user exists, update the user's name, email, and password
+    if (user) {
+      user.name = req.body.name || user.name
+      user.email = req.body.email || user.email
+      // if the password is provided in the request body, hash it and update the user's password
+      if (req.body.password) {
+        user.password = bcrypt.hashSync(req.body.password, 8)
+      }
+      // save the updated user in the database
+      const updatedUser = await user.save()
+      // return a JSON response containing data about the updated user
+      res.send({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        isAdmin: updatedUser.isAdmin,
+        token: generateToken(updatedUser), // generate a token for the updated user
+      })
+      return // exit the route handler
+    }
+
+    res.status(404).json({ message: 'User not found' }) // return a 404 Not Found status code if the user is not found
+  })
+)

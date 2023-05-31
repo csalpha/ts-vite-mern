@@ -204,5 +204,17 @@
     4. main.tsx
     5. App.tsx
 
+30. Create Profile Page
+
+    1. userRouter.ts
+    2. userHooks.ts
+    3. ProfilePage.ts
+    4. main.tsx
+    5. App.tsx
+
+
+
+
+
 
 

@@ -1,3 +1,4 @@
+// import necesssary dependencies
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
@@ -24,6 +25,10 @@ import PlaceOrderPage from "./pages/PlaceOrderPage";
 import OrderPage from "./pages/OrderPage";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import OrderHistoryPage from './pages/OrderHistoryPage'
+import ProfilePage from './pages/ProfilePage'
+
+// Desc: The main entry point for the client application.
+
 
 // Create a browser router instance
 const router = createBrowserRouter(
@@ -31,6 +36,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     // define top-level route ( App Component)
     <Route path='/' element={<App />}>
+      {/* define child routes */}
       <Route
         index={true} //set as the index route
         element={<HomePage />}
@@ -39,12 +45,14 @@ const router = createBrowserRouter(
       <Route path='cart' element={<CartPage />} />
       <Route path='signin' element={<SigninPage />} />
       <Route path='signup' element={<SignupPage />} />
+      {/* Protected routes */}
       <Route path='' element={<ProtectedRoute />}>
         <Route path='shipping' element={<ShippingAddressPage />} />
         <Route path='payment' element={<PaymentMethodPage />} />
         <Route path='placeorder' element={<PlaceOrderPage />} />
         <Route path='/order/:id' element={<OrderPage />} />
         <Route path="/orderhistory" element={<OrderHistoryPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Route>
     </Route>
   )

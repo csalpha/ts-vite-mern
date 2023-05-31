@@ -44,3 +44,26 @@ export const useSignupMutation = () =>
         })
       ).data, // It expects a response of type 'UserInfo' and returns the 'data' property from the response.
   });
+
+// Exporting a custom hook named useUpdateProfileMutation
+  export const useUpdateProfileMutation = () =>
+  useMutation({
+    // Defining the mutation function
+    mutationFn: async (
+    {
+      name,
+      email,
+      password,
+    }: {
+      name: string
+      email: string
+      password: string
+    }) =>
+      ( // Makes an asynchronous a PUT request to the server's 'profile' API endpoint with the provided name, email and password.
+        await apiClient.put<UserInfo>(`api/users/profile`, {
+          name,
+          email,
+          password,
+        })
+      ).data, // It expects a response of type 'UserInfo' and returns the 'data' property from the response.
+  })
